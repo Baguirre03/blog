@@ -27,23 +27,25 @@ async function postAPI(backslash, information) {
   }
 }
 
-async function postSignUP(backslash, info) {
-  console.log(info, "info");
+async function postAPIsignup(data) {
   try {
-    const response = await fetch(`http://localhost:3000/${backslash}`, {
+    const response = await fetch(`http://localhost:3000/signup`, {
       mode: "cors",
       method: "POST",
-      body: JSON.stringify({
-        username: info.username,
-        password: info.password,
-        confirm_password: info.confirm_password,
-      }),
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     });
-    const data = await response.json();
-    return data;
+    const rsp = await response.json();
+    if (rsp.errors.length > 0) {
+      return { created: false, errors: rsp.errors };
+    } else {
+      return { created: true, rsp };
+    }
   } catch (err) {
-    throw new Error(err);
+    return { err };
   }
 }
 
-export { grabAPI, postAPI, postSignUP };
+export { grabAPI, postAPI, postAPIsignup };
