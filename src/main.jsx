@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
@@ -17,12 +17,12 @@ const router = createBrowserRouter([
   },
   {
     path: "signup",
-    element: <SignUp></SignUp>
-  }, 
+    element: <SignUp></SignUp>,
+  },
   {
     path: "login",
-    element: <Login></Login>
-  }
+    element: <Login></Login>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

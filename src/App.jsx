@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import BlogLink from "./BlogLink";
-import { grabAPI } from "./API";
+import { grabAPI, logout } from "./API";
 import { Link } from "react-router-dom";
 
 function App() {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState(false);
+  const [user, setUser] = useState(localStorage.getItem("username"));
+  // console.log(user, localStorage.getItem("SavedToken"));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,18 +17,39 @@ function App() {
     fetchData();
   }, []);
 
-  return posts != null ? (
-    <>
+  return posts ? (
+    <div>
+      <h1>{user ? user : ""}</h1>
       {posts.map((info) => {
         return <BlogLink key={info._id} info={info}></BlogLink>;
       })}
+      <div>
+        {!user && (
+          <>
+            <h1>
+              Sign up <Link to="/signup">HERE</Link> to make posts!
+            </h1>
+            <h1>
+              Or Login <Link to="/login">here!</Link>!
+            </h1>
+          </>
+        )}
+      </div>
       <h1>
-        Sign up <Link to="/signup">HERE</Link> to make posts!
+        {user ? (
+          <button
+            onClick={() => {
+              logout();
+              setUser(false);
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          ""
+        )}
       </h1>
-      <h1>
-        Or Login <Link to="/login">here!</Link>!
-      </h1>
-    </>
+    </div>
   ) : (
     <h1>Loading...</h1>
   );

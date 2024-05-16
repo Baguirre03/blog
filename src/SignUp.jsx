@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { postAPIsignup } from "./API";
+import { loginPost, postAPIsignup } from "./API";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [errors, setErrors] = useState([]);
+  const [userCreated, setUserCreated] = useState(false);
+
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -12,17 +15,20 @@ export default function SignUp() {
       data[key] = value;
     }
     const res = await postAPIsignup(data);
-    console.log(res);
     if (res.created) {
-      //LOGIN
-      console.log("User Created!");
       setErrors([]);
+      setUserCreated(true);
+      await loginPost(data.username, data.password);
     } else {
       setErrors(res.errors);
     }
   }
 
-  return (
+  return userCreated ? (
+    <div>
+      <Navigate to="/"></Navigate>
+    </div>
+  ) : (
     <div>
       <h1>Sign up today!</h1>
       <form onSubmit={handleSubmit}>

@@ -1,6 +1,11 @@
+const URL =
+  import.meta.env.VITE_MODE == "deployed"
+    ? "https://blog-api-top.fly.dev"
+    : "http://localhost:3000";
+
 async function grabAPI(backslash) {
   try {
-    const response = await fetch(`https://blog-api-top.fly.dev/${backslash}`, {
+    const response = await fetch(`${URL}/${backslash}`, {
       mode: "cors",
       method: "GET",
     });
@@ -13,7 +18,7 @@ async function grabAPI(backslash) {
 
 async function postAPI(backslash, information) {
   try {
-    const response = await fetch(`https://blog-api-top.fly.dev/${backslash}`, {
+    const response = await fetch(`${URL}/${backslash}`, {
       mode: "cors",
       method: "POST",
       body: JSON.stringify({
@@ -29,7 +34,7 @@ async function postAPI(backslash, information) {
 
 async function postAPIsignup(data) {
   try {
-    const response = await fetch(`http://localhost:3000/signup`, {
+    const response = await fetch(`${URL}/signup`, {
       mode: "cors",
       method: "POST",
       body: JSON.stringify(data),
@@ -48,4 +53,31 @@ async function postAPIsignup(data) {
   }
 }
 
-export { grabAPI, postAPI, postAPIsignup };
+async function loginPost(user, pass) {
+  try {
+    const response = await fetch(`${URL}/login`, {
+      mode: "cors",
+      method: "POST",
+      body: JSON.stringify({
+        username: user,
+        password: pass,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const rsp = await response.json();
+    localStorage.setItem("username", user);
+    localStorage.setItem("SavedToken", "Bearer " + rsp.token);
+    return rsp;
+  } catch (err) {
+    return { err };
+  }
+}
+
+function logout() {
+  localStorage.setItem("username", false);
+  localStorage.setItem("SavedToken", false);
+}
+
+export { grabAPI, postAPI, postAPIsignup, loginPost, logout };
