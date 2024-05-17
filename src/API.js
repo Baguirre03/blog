@@ -66,18 +66,23 @@ async function loginPost(user, pass) {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
-    const rsp = await response.json();
-    localStorage.setItem("username", user);
-    localStorage.setItem("SavedToken", "Bearer " + rsp.token);
-    return rsp;
+    const result = await response.json();
+    console.log(result);
+    if (result.rsp.loggedin) {
+      localStorage.setItem("UserId", result.user._id);
+      localStorage.setItem("Username", result.user.username);
+      localStorage.setItem("SavedToken", "Bearer " + result.token);
+    }
+    return result;
   } catch (err) {
     return { err };
   }
 }
 
 function logout() {
-  localStorage.setItem("username", false);
-  localStorage.setItem("SavedToken", false);
+  localStorage.clear("UserId");
+  localStorage.clear("Username");
+  localStorage.clear("SavedToken");
 }
 
 export { grabAPI, postAPI, postAPIsignup, loginPost, logout };

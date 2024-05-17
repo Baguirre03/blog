@@ -17,8 +17,10 @@ export default function SignUp() {
     const res = await postAPIsignup(data);
     if (res.created) {
       setErrors([]);
-      setUserCreated(true);
-      await loginPost(data.username, data.password);
+      const res = await loginPost(data.username, data.password);
+      if (res.rsp.loggedin) {
+        setUserCreated(true);
+      }
     } else {
       setErrors(res.errors);
     }

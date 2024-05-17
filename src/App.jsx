@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 
 function App() {
   const [posts, setPosts] = useState(false);
-  const [user, setUser] = useState(localStorage.getItem("username"));
-  // console.log(user, localStorage.getItem("SavedToken"));
+  const [user, setUser] = useState(localStorage.getItem("Username"));
 
+  console.log(user, "user");
   useEffect(() => {
     const fetchData = async () => {
       const data = await grabAPI("posts");
@@ -19,12 +19,12 @@ function App() {
 
   return posts ? (
     <div>
-      <h1>{user ? user : ""}</h1>
+      <h1>{user != null ? user : ""}</h1>
       {posts.map((info) => {
         return <BlogLink key={info._id} info={info}></BlogLink>;
       })}
       <div>
-        {!user && (
+        {user == null && (
           <>
             <h1>
               Sign up <Link to="/signup">HERE</Link> to make posts!
@@ -36,17 +36,17 @@ function App() {
         )}
       </div>
       <h1>
-        {user ? (
+        {user != null ? (
           <button
             onClick={() => {
               logout();
-              setUser(false);
+              setUser(null);
             }}
           >
             Logout
           </button>
         ) : (
-          ""
+          " "
         )}
       </h1>
     </div>

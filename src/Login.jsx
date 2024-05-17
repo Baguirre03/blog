@@ -14,13 +14,14 @@ export default function Login() {
     for (const [key, value] of formData.entries()) {
       data[key] = value;
     }
-    const res = await loginPost(data.username, data.password);
-    if (res.rsp.loggedin) {
+    const result = await loginPost(data.username, data.password);
+    console.log(result, "result");
+    if (result.rsp.loggedin) {
       // Grab TOKEN and set to BEARER in local storage for correct use
       setError("");
       setUser(true);
     } else {
-      setError(res.errors);
+      setError(result.rsp.errors);
     }
   }
 
