@@ -15,7 +15,6 @@ export default function Login() {
       data[key] = value;
     }
     const result = await loginPost(data.username, data.password);
-    console.log(result, "result");
     if (result.rsp.loggedin) {
       // Grab TOKEN and set to BEARER in local storage for correct use
       setError("");

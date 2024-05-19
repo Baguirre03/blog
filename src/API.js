@@ -67,12 +67,34 @@ async function loginPost(user, pass) {
       },
     });
     const result = await response.json();
-    console.log(result);
     if (result.rsp.loggedin) {
       localStorage.setItem("UserId", result.user._id);
       localStorage.setItem("Username", result.user.username);
       localStorage.setItem("SavedToken", "Bearer " + result.token);
     }
+    return result;
+  } catch (err) {
+    return { err };
+  }
+}
+
+async function articlePost(data) {
+  try {
+    const response = await fetch(`${URL}/posts/post`, {
+      mode: "cors",
+      method: "POST",
+      body: JSON.stringify({
+        title: data.title,
+        text: data.text,
+      }),
+      headers: {
+        Authorization: localStorage.getItem("SavedToken"),
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+
     return result;
   } catch (err) {
     return { err };
@@ -85,4 +107,4 @@ function logout() {
   localStorage.clear("SavedToken");
 }
 
-export { grabAPI, postAPI, postAPIsignup, loginPost, logout };
+export { grabAPI, postAPI, postAPIsignup, loginPost, logout, articlePost };

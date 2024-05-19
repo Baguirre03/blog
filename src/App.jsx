@@ -8,7 +8,6 @@ function App() {
   const [posts, setPosts] = useState(false);
   const [user, setUser] = useState(localStorage.getItem("Username"));
 
-  console.log(user, "user");
   useEffect(() => {
     const fetchData = async () => {
       const data = await grabAPI("posts");
@@ -36,7 +35,7 @@ function App() {
         )}
       </div>
       <h1>
-        {user != null ? (
+        {user != null && (
           <button
             onClick={() => {
               logout();
@@ -45,10 +44,9 @@ function App() {
           >
             Logout
           </button>
-        ) : (
-          " "
         )}
       </h1>
+      <h1>{user != null && <Link to="/post">Create a post here!</Link>}</h1>
     </div>
   ) : (
     <h1>Loading...</h1>

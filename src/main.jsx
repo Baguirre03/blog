@@ -5,6 +5,7 @@ import App from "./App";
 import Blog from "./Blog";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import CreatePost from "./CreatePost";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login></Login>,
+  },
+  {
+    path: "post",
+    element: <CreatePost></CreatePost>,
   },
 ]);
 
