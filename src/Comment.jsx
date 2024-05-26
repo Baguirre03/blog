@@ -1,5 +1,9 @@
-function Comment() {
-    return <h1>hi</h1>
+function Comment({ data }) {
+  return (
+    <h4>
+      {data.user.username}: {data.text}
+    </h4>
+  );
 }
 
-export default Comment
+export default Comment;

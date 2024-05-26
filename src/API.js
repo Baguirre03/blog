@@ -93,8 +93,28 @@ async function articlePost(data) {
       },
     });
     const result = await response.json();
-    console.log(result);
+    console.log(result, "RESULT API");
 
+    return result;
+  } catch (err) {
+    return { err };
+  }
+}
+
+async function commentPost(data, id) {
+  try {
+    const response = await fetch(`${URL}/posts/create/${id}/comment`, {
+      mode: "cors",
+      method: "POST",
+      body: JSON.stringify({
+        text: data.text,
+      }),
+      headers: {
+        Authorization: localStorage.getItem("SavedToken"),
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const result = await response.json();
     return result;
   } catch (err) {
     return { err };
@@ -107,4 +127,12 @@ function logout() {
   localStorage.clear("SavedToken");
 }
 
-export { grabAPI, postAPI, postAPIsignup, loginPost, logout, articlePost };
+export {
+  grabAPI,
+  postAPI,
+  postAPIsignup,
+  loginPost,
+  logout,
+  articlePost,
+  commentPost,
+};
