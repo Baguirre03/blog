@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import HomeLink from "./HomeLink";
 import "./index.css"; // Import your styles
+import CommentForm from "./CommentForm";
 
 function Blog() {
   const [post, setPosts] = useState(null);
@@ -58,16 +59,11 @@ function Blog() {
         })}
       </li>
       {user != null && (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="body"
-            onChange={handleChange}
-            value={commentState}
-            name="text"
-            placeholder="Body"
-          />
-          <button type="submit">Create Comment</button>
-        </form>
+        <CommentForm
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          commentState={commentState}
+        ></CommentForm>
       )}
       <HomeLink></HomeLink>
     </div>

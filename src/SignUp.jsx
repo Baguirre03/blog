@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { loginPost, postAPIsignup } from "./API";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import Input from "./Input";
+import HomeLink from "./HomeLink";
 
 export default function SignUp() {
   const [errors, setErrors] = useState([]);
@@ -31,16 +33,16 @@ export default function SignUp() {
       <Navigate to="/"></Navigate>
     </div>
   ) : (
-    <div>
-      <h1>Sign up today!</h1>
+    <div className="max-w-sm mx-auto sign-up-form">
+      {/* <h1 className="items-center">Sign up today!</h1> */}
       <form onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="username" />
-        <input type="password" name="password" placeholder="password" />
-        <input
-          type="password"
-          name="confirm_password"
-          placeholder="confirm password"
-        />
+        <Input inputName="username" type="text"></Input>
+        <Input inputName="password" type="text"></Input>
+        <Input
+          difName="Confirm Password"
+          inputName="confirm_password"
+          type="text"
+        ></Input>
         <button type="submit">Sign up!</button>
       </form>
       <ul>
@@ -48,6 +50,7 @@ export default function SignUp() {
           <li key={err}>{err}</li>
         ))}
       </ul>
+      <HomeLink></HomeLink>
     </div>
   );
 }

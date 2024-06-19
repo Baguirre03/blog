@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./index.css";
 import "./App.css";
 import BlogLink from "./BlogLink";
 import { grabAPI, logout } from "./API";
@@ -18,23 +19,37 @@ function App() {
 
   return posts ? (
     <div>
-      <h1>{user != null ? user : ""}</h1>
+      <h1>Welcome back {user != null ? user : ""}</h1>
       {posts.map((info) => {
         return <BlogLink key={info._id} info={info}></BlogLink>;
       })}
       <div>
         {user == null && (
           <>
-            <h1>
-              Sign up <Link to="/signup">HERE</Link> to make posts!
-            </h1>
-            <h1>
-              Or Login <Link to="/login">here!</Link>!
-            </h1>
+            <div>
+              Sign up{" "}
+              <Link
+                to="/signup"
+                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              >
+                HERE
+              </Link>{" "}
+              to make posts!
+            </div>
+            <div>
+              Or Login{" "}
+              <Link
+                to="/login"
+                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              >
+                here!
+              </Link>
+              !
+            </div>
           </>
         )}
       </div>
-      <h1>
+      <div>
         {user != null && (
           <button
             onClick={() => {
@@ -45,8 +60,14 @@ function App() {
             Logout
           </button>
         )}
-      </h1>
-      <h1>{user != null && <Link to="/post">Create a post here!</Link>}</h1>
+      </div>
+      <div>
+        {user != null && (
+          <button>
+            <Link to="/post">Create a post here!</Link>
+          </button>
+        )}
+      </div>
     </div>
   ) : (
     <h1>Loading...</h1>
