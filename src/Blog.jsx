@@ -3,6 +3,7 @@ import { commentPost, grabAPI } from "./API";
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import HomeLink from "./HomeLink";
+import "./index.css"; // Import your styles
 
 function Blog() {
   const [post, setPosts] = useState(null);
@@ -44,8 +45,8 @@ function Blog() {
     <h1>Loading...</h1>
   ) : (
     <div className="post" key={post._id}>
-      <h1 className="post-title">{post.title}</h1>
-      <h1 className="post-user">Made by {post.user.username}</h1>
+      <h1 className="text-3xl font-bold underline">{post.title}</h1>
+      <h1 className="post-user text-slate-500">Made by {post.user.username}</h1>
       <div className="post-content">{post.text}</div>
       <li className="post-comments">
         {comments.map((comment) => {

@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import "./index.css";
 
-function BlogLink({info}) {
-    return (
-        <Link to={"posts/" + info._id}>
-            <h1 key={info._id}>{info.user.username} wrote: {info.text}</h1>
-        </Link>        
-    )
+function BlogLink({ info }) {
+  return (
+    <Link
+      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      to={"posts/" + info._id}
+    >
+      <div key={info._id}>
+        {info.user.username} wrote: {info.text}
+      </div>
+    </Link>
+  );
 }
 
-export default BlogLink
+export default BlogLink;
