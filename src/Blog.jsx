@@ -5,12 +5,15 @@ import Comment from "./Comment";
 import HomeLink from "./HomeLink";
 import "./index.css"; // Import your styles
 import CommentForm from "./CommentForm";
+import Header from "./Header";
+import { format, parseISO } from "date-fns";
 
 function Blog() {
   const [post, setPosts] = useState(null);
   const [comments, setComments] = useState([]);
   const [commentState, setCommentState] = useState("");
   const [user, setUser] = useState(localStorage.getItem("Username"));
+  const [postDate, setPostDate] = useState(null);
 
   const { id } = useParams();
   useEffect(() => {
@@ -18,6 +21,7 @@ function Blog() {
       const data = await grabAPI(`posts/${id}`);
       setPosts(data.article);
       setComments(data.allArticleComments);
+      setPostDate(format(post.date, "MM-dd-yyyy"));
     };
     fetchData();
   }, []);
@@ -41,32 +45,48 @@ function Blog() {
     e.preventDefault();
     setCommentState(e.target.value);
   }
-
+  console.log(post);
   return !post ? (
     <h1>Loading...</h1>
   ) : (
-    <div className="post" key={post._id}>
-      <h1 className="text-3xl font-bold underline">{post.title}</h1>
-      <h1 className="post-user text-slate-500">Made by {post.user.username}</h1>
-      <div className="post-content">{post.text}</div>
-      <li className="post-comments">
-        {comments.map((comment) => {
-          return (
-            <Comment key={comment._id} data={comment}>
-              {}
-            </Comment>
-          );
-        })}
-      </li>
-      {user != null && (
-        <CommentForm
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          commentState={commentState}
-        ></CommentForm>
-      )}
-      <HomeLink></HomeLink>
-    </div>
+    <>
+      <Header></Header>'{" "}
+      <div
+        className="post max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6"
+        key={post._id}
+      >
+        <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+        <div class="flex items-center  justify-center mb-6">
+          <img
+            class="w-10 h-10 rounded-full mr-4"
+            src="https://via.placeholder.com/40"
+            alt="User Avatar"
+          />
+          <div>
+            <p class="text-xl font-semibold"> {post.user.username}</p>
+            <p class="text-gray-600">{postDate}</p>
+          </div>
+        </div>
+
+        <div className="post-content prose max-w-none">{post.text}</div>
+        {user != null && (
+          <CommentForm
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            commentState={commentState}
+          ></CommentForm>
+        )}
+        <li className="post-comments flex flex-col items-center">
+          {comments.map((comment) => {
+            return (
+              <Comment key={comment._id} data={comment}>
+                {}
+              </Comment>
+            );
+          })}
+        </li>
+      </div>
+    </>
   );
 }
 

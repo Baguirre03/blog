@@ -6,7 +6,7 @@ export default function CommentForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-2xl bg-white rounded-lg border p-2 mx-auto mt-5"
+      className=" max-w-lg bg-white rounded-lg border p-2 mx-auto mt-5 mb-7"
     >
       <div className="px-3 mb-2 mt-2">
         <input

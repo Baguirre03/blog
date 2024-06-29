@@ -8,7 +8,7 @@ function BlogLink({ info }) {
       to={"posts/" + info._id}
     >
       <div key={info._id}>
-        {info.user.username} wrote: {info.text}
+        {info.user.username} wrote: {info.title}
       </div>
     </Link>
   );
