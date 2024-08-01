@@ -2,6 +2,7 @@ import { useState } from "react";
 import { articlePost } from "./API";
 import HomeLink from "./HomeLink";
 import { Navigate } from "react-router-dom";
+import Input from "./Input";
 
 export default function CreatePost() {
   const [postCreated, setPostCreated] = useState(false);
@@ -17,7 +18,7 @@ export default function CreatePost() {
     }
     const res = await articlePost(data);
     if (res.rsp.created) setPostCreated(true);
-    else setError(res.rsp.error);
+    else setError("Missing value");
   }
 
   if (postCreated) {
@@ -25,14 +26,16 @@ export default function CreatePost() {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="title" placeholder="Title" />
-        <input type="body" name="text" placeholder="Body" />
-        <button type="submit">Post!</button>
-      </form>
-      <ul>{errors}</ul>
-      <HomeLink></HomeLink>
-    </>
+    <div className="flex-col h-full bg-white flex justify-center">
+      <div className="gap-2 mx-auto sign-up-form flex flex-col items-center border-solid border-2 border-black justify-center w-6/12 bg-white p-6  rounded shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+        <form onSubmit={handleSubmit}>
+          <Input type="text" inputName="title" placeholder="Title"></Input>
+          <Input type="textarea" inputName="text" placeholder="Body"></Input>
+          <button type="submit">Post!</button>
+        </form>
+        <ul>{errors}</ul>
+        <HomeLink></HomeLink>
+      </div>
+    </div>
   );
 }

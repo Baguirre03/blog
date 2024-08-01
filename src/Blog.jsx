@@ -21,7 +21,8 @@ function Blog() {
       const data = await grabAPI(`posts/${id}`);
       setPosts(data.article);
       setComments(data.allArticleComments);
-      setPostDate(format(post.date, "MM-dd-yyyy"));
+      console.log(data);
+      setPostDate(format(data.article.date, "MM-dd-yyyy"));
     };
     fetchData();
   }, []);
@@ -45,30 +46,33 @@ function Blog() {
     e.preventDefault();
     setCommentState(e.target.value);
   }
-  console.log(post);
+
   return !post ? (
     <h1>Loading...</h1>
   ) : (
     <>
       <Header></Header>'{" "}
       <div
-        className="post max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6"
+        className="post max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6 border-2 mb-8"
         key={post._id}
       >
         <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-        <div class="flex items-center  justify-center mb-6">
+        <div className="flex items-center justify-center mb-6">
           <img
-            class="w-10 h-10 rounded-full mr-4"
+            className="w-10 h-10 rounded-full mr-4"
             src="https://via.placeholder.com/40"
             alt="User Avatar"
           />
           <div>
-            <p class="text-xl font-semibold"> {post.user.username}</p>
-            <p class="text-gray-600">{postDate}</p>
+            <p className="text-xl font-semibold"> {post.user.username}</p>
+            <p className="text-gray-600">{postDate}</p>
           </div>
         </div>
 
         <div className="post-content prose max-w-none">{post.text}</div>
+      </div>
+      <div className="comment-section flex flex-col w-full justify-center items-center border-2">
+        {" "}
         {user != null && (
           <CommentForm
             handleSubmit={handleSubmit}
@@ -76,7 +80,7 @@ function Blog() {
             commentState={commentState}
           ></CommentForm>
         )}
-        <li className="post-comments flex flex-col items-center">
+        <li className="post-comments flex w-full justify-center mb-10 flex-col items-center">
           {comments.map((comment) => {
             return (
               <Comment key={comment._id} data={comment}>

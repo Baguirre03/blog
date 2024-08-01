@@ -93,7 +93,6 @@ async function articlePost(data) {
       },
     });
     const result = await response.json();
-    console.log(result, "RESULT API");
 
     return result;
   } catch (err) {

@@ -3,6 +3,7 @@ import { loginPost, postAPIsignup } from "./API";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Input from "./Input";
 import HomeLink from "./HomeLink";
+import Header from "./Header";
 
 export default function SignUp() {
   const [errors, setErrors] = useState([]);
@@ -33,24 +34,34 @@ export default function SignUp() {
       <Navigate to="/"></Navigate>
     </div>
   ) : (
-    <div className="max-w-sm mx-auto sign-up-form">
-      {/* <h1 className="items-center">Sign up today!</h1> */}
-      <form onSubmit={handleSubmit}>
-        <Input inputName="username" type="text"></Input>
-        <Input inputName="password" type="text"></Input>
-        <Input
-          difName="Confirm Password"
-          inputName="confirm_password"
-          type="text"
-        ></Input>
-        <button type="submit">Sign up!</button>
-      </form>
-      <ul>
-        {errors.map((err) => (
-          <li key={err}>{err}</li>
-        ))}
-      </ul>
-      <HomeLink></HomeLink>
+    <div className="flex-col h-full bg-white flex justify-center">
+      <div className="gap-2 mx-auto sign-up-form flex flex-col items-center border-solid border-2 border-black justify-center w-6/12 bg-white p-6  rounded shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+        {/* <h1 className="items-center">Sign up today!</h1> */}
+        <h1>Sign Up!</h1>
+        <form onSubmit={handleSubmit}>
+          <Input inputName="username" type="text"></Input>
+          <Input
+            difName="Short User Description"
+            inputName="description"
+            type="text"
+          ></Input>
+          <Input inputName="password" type="text"></Input>
+          <Input
+            difName="Confirm Password"
+            inputName="confirm_password"
+            type="text"
+          ></Input>
+          <button className="button-submit" type="submit">
+            Sign up!
+          </button>
+        </form>
+        <ul>
+          {errors.map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+        <HomeLink></HomeLink>
+      </div>
     </div>
   );
 }

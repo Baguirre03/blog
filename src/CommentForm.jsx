@@ -6,7 +6,7 @@ export default function CommentForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className=" max-w-lg bg-white rounded-lg border p-2 mx-auto mt-5 mb-7"
+      className=" bg-white rounded-lg border-2 p-2 mx-auto mt-5 mb-7 w-3/6"
     >
       <div className="px-3 mb-2 mt-2">
         <input
@@ -18,7 +18,7 @@ export default function CommentForm({
           name="text"
         ></input>
       </div>
-      <div class="flex justify-end px-4">
+      <div className="flex justify-end px-4">
         <button
           className="px-2.5 py-1.5 rounded-md text-white text-sm bg-indigo-500"
           type="submit"

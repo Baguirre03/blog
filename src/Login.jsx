@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { loginPost } from "./API";
 import { Navigate } from "react-router-dom";
+import HomeLink from "./HomeLink";
+import Input from "./Input";
 
 export default function Login() {
   const [error, setError] = useState("");
@@ -27,14 +29,25 @@ export default function Login() {
   return user ? (
     <Navigate to="/"></Navigate>
   ) : (
-    <div>
-      <h1>Login!</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="username" />
-        <input type="password" name="password" placeholder="password" />
-        <button type="submit">Sign up!</button>
-      </form>
-      <div>{error}</div>
+    <div className="flex-col h-full bg-white flex justify-center">
+      <div className="gap-2 mx-auto sign-up-form flex flex-col items-center border-solid border-2 border-black justify-center w-6/12 bg-white p-6  rounded shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+        <h1>Login!</h1>
+        <form onSubmit={handleSubmit}>
+          <Input
+            inputName="username"
+            type="text"
+            placeholder="username"
+          ></Input>
+          <Input
+            inputName="password"
+            type="text"
+            placeholder="password"
+          ></Input>
+          <button type="submit">Sign up!</button>
+        </form>
+        <div>{error}</div>
+        <HomeLink></HomeLink>
+      </div>
     </div>
   );
 }

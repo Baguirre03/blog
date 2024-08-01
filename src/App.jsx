@@ -20,7 +20,8 @@ function App() {
   return posts ? (
     <>
       <Header></Header>
-      <div>
+
+      <div className="bg-gray-100 min-h-screen flex flex-col items-center gap-10 pt-5">
         {posts.map((info) => {
           return <BlogLink key={info._id} info={info}></BlogLink>;
         })}

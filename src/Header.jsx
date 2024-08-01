@@ -7,9 +7,11 @@ export default function Header() {
   const [user, setUser] = useState(localStorage.getItem("Username"));
 
   return (
-    <nav className="border-gray-200 dark:bg-gray-900 dark:border-gray-700 flex align-middle justify-between p-5 bg-gray-300">
+    <nav className="border-gray-200 dark:bg-gray-900 dark:border-gray-700 flex align-middle justify-between p-5 bg-teal-500">
       <div className="blog-header flex items-center justify-center text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
-        <Link to="/">Blog-Api</Link>
+        <Link to="/" className="font-serif">
+          Blog-Api
+        </Link>
       </div>
       <div className="nav-options flex gap-4">
         <div>
