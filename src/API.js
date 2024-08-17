@@ -1,6 +1,6 @@
 const URL =
   import.meta.env.VITE_MODE == "deployed"
-    ? "https://blog-api-top.fly.dev/"
+    ? "https://blog-api-top.fly.dev"
     : "http://localhost:3000";
 
 async function grabAPI(backslash) {
