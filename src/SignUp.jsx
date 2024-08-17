@@ -37,7 +37,7 @@ export default function SignUp() {
   ) : (
     <div className="flex flex-col w-full h-full">
       <Header></Header>
-      <div className="text-center flex h-full bg-white dark:bg-gray-900 justify-center align-center items-center">
+      <div className="text-center first:flex h-full bg-white dark:bg-gray-900 justify-center align-center items-center">
         <div className="gap-2 mx-auto sign-up-form flex flex-col items-center border-solid border-2 border-black dark:border-gray-700 justify-center h-min w-6/12 bg-white dark:bg-gray-800 p-6 rounded shadow-md dark:shadow-[rgba(255,_255,_255,_0.2)_0px_30px_90px]">
           <h1 className="text-gray-900 dark:text-white">Sign Up!</h1>
           <form onSubmit={handleSubmit}>
