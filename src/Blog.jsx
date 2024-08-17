@@ -2,11 +2,10 @@ import { useParams } from "react-router-dom";
 import { commentPost, grabAPI } from "./API";
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
-import HomeLink from "./HomeLink";
 import "./index.css"; // Import your styles
 import CommentForm from "./CommentForm";
 import Header from "./Header";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 
 function Blog() {
   const [post, setPosts] = useState(null);
