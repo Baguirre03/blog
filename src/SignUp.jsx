@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import Input from "./Input";
 import HomeLink from "./HomeLink";
 import Header from "./Header";
+import SignUpButton from "./SignUpButton";
 
 export default function SignUp() {
   const [errors, setErrors] = useState([]);
@@ -34,33 +35,42 @@ export default function SignUp() {
       <Navigate to="/"></Navigate>
     </div>
   ) : (
-    <div className="flex-col h-full bg-white flex justify-center">
-      <div className="gap-2 mx-auto sign-up-form flex flex-col items-center border-solid border-2 border-black justify-center w-6/12 bg-white p-6  rounded shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
-        {/* <h1 className="items-center">Sign up today!</h1> */}
-        <h1>Sign Up!</h1>
-        <form onSubmit={handleSubmit}>
-          <Input inputName="username" type="text"></Input>
-          <Input
-            difName="Short User Description"
-            inputName="description"
-            type="text"
-          ></Input>
-          <Input inputName="password" type="text"></Input>
-          <Input
-            difName="Confirm Password"
-            inputName="confirm_password"
-            type="text"
-          ></Input>
-          <button className="button-submit" type="submit">
-            Sign up!
-          </button>
-        </form>
-        <ul>
-          {errors.map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-        <HomeLink></HomeLink>
+    <div className="flex flex-col w-full h-full">
+      <Header></Header>
+      <div className="text-center flex h-full bg-white dark:bg-gray-900 justify-center align-center items-center">
+        <div className="gap-2 mx-auto sign-up-form flex flex-col items-center border-solid border-2 border-black dark:border-gray-700 justify-center h-min w-6/12 bg-white dark:bg-gray-800 p-6 rounded shadow-md dark:shadow-[rgba(255,_255,_255,_0.2)_0px_30px_90px]">
+          <h1 className="text-gray-900 dark:text-white">Sign Up!</h1>
+          <form onSubmit={handleSubmit}>
+            <Input
+              inputName="username"
+              type="text"
+              className="bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+            />
+            <Input
+              difName="Short User Description"
+              inputName="description"
+              type="text"
+              className="bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+            />
+            <Input
+              inputName="password"
+              type="text"
+              className="bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+            />
+            <Input
+              difName="Confirm Password"
+              inputName="confirm_password"
+              type="text"
+              className="bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+            />
+            <SignUpButton login={false} />
+          </form>
+          <ul className="text-red-500 dark:text-red-400">
+            {errors.map((err) => (
+              <li key={err}>{err}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

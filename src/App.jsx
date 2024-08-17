@@ -8,6 +8,7 @@ import Header from "./Header";
 
 function App() {
   const [posts, setPosts] = useState(false);
+  localStorage.setItem("dark", "");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,11 +21,12 @@ function App() {
   return posts ? (
     <>
       <Header></Header>
-
-      <div className="bg-gray-100 min-h-screen flex flex-col items-center gap-10 pt-5">
-        {posts.map((info) => {
-          return <BlogLink key={info._id} info={info}></BlogLink>;
-        })}
+      <div className="max-w-full dark:bg-gray-800 container flex justify-center pb-10 pt-10">
+        <div className="dark:bg-gray-800 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {posts.map((info) => {
+            return <BlogLink key={info._id} info={info}></BlogLink>;
+          })}
+        </div>
       </div>
     </>
   ) : (

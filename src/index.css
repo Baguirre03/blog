@@ -27,6 +27,11 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+  overscroll-behavior: none;
+}
+
+body.dark {
+  background-color: rgb(17 24 39);
 }
 
 h1 {
@@ -46,6 +51,7 @@ button {
   transition: border-color 0.25s;
   box-shadow: rgba(13, 38, 76, 0.19) 0px 9px 20px;
 }
+
 button:hover {
   border-color: #646cff;
 }
