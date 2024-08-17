@@ -11,7 +11,7 @@ export default function Header() {
     <nav className="dark:bg-gray-800 bg-white shadow-md border-b-2 border-gray-300 px-6 py-3 flex items-center justify-between">
       <div className="blog-header flex items-center justify-center text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
         <Link to="/" className="font-serif">
-          Blog-Api
+          Awesome Blog
         </Link>
       </div>
       <div className="nav-options flex gap-4">
