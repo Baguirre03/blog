@@ -16,7 +16,6 @@ function App() {
       setPosts(data.allArticles);
     };
     fetchData();
-    console.log("test");
   }, []);
 
   return posts ? (
